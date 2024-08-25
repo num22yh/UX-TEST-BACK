@@ -1,3 +1,13 @@
+# IntelliJ project files
+.idea
+out
+build
+
+# Gradle
+.gradle
+/build/
+.gradletasknamecache
+
 # Compiled class file
 *.class
 
