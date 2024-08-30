@@ -1,14 +1,12 @@
-package com.example.Hamkkenali2Server.ChatGPT;
+package com.example.Hamkkenali2Server.conversationalChatbot.controller;
 
-import com.example.Hamkkenali2Server.service.TranslateService;
-import com.example.Hamkkenali2Server.ChatGPT.ChatGPTServiceImpl;
+import com.example.Hamkkenali2Server.conversationalChatbot.service.ChatGPTService;
+import com.example.Hamkkenali2Server.conversationalChatbot.dto.ChatCompletionDto;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 @Slf4j
 @RestController

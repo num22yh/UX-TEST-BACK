@@ -1,13 +1,10 @@
-package com.example.Hamkkenali2Server.controller;
+package com.example.Hamkkenali2Server.user.controller;
 
-import com.example.Hamkkenali2Server.entity.UserInfo;
-import com.example.Hamkkenali2Server.entity.UserInfoRepository;
+import com.example.Hamkkenali2Server.user.entity.UserInfo;
+import com.example.Hamkkenali2Server.user.repository.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 @RestController

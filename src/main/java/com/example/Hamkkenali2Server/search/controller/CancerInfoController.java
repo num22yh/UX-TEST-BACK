@@ -1,9 +1,9 @@
-package com.example.Hamkkenali2Server.controller;
+package com.example.Hamkkenali2Server.search.controller;
 
-import com.example.Hamkkenali2Server.entity.CancerInfo;
-import com.example.Hamkkenali2Server.entity.UserInfo;
-import com.example.Hamkkenali2Server.service.CancerInfoService;
-import com.example.Hamkkenali2Server.service.UserInfoService;
+import com.example.Hamkkenali2Server.search.entity.CancerInfo;
+import com.example.Hamkkenali2Server.user.entity.UserInfo;
+import com.example.Hamkkenali2Server.search.service.CancerInfoService;
+import com.example.Hamkkenali2Server.user.service.UserInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

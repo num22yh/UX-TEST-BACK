@@ -1,12 +1,12 @@
-package com.example.Hamkkenali2Server.controller;
+package com.example.Hamkkenali2Server.conversationalChatbot.controller;
 
-import com.example.Hamkkenali2Server.ChatGPT.ChatCompletionDto;
-import com.example.Hamkkenali2Server.ChatGPT.ChatGPTService;
-import com.example.Hamkkenali2Server.ChatGPT.ChatRequestMsgDto;
-import com.example.Hamkkenali2Server.entity.TranslateRequest;
-import com.example.Hamkkenali2Server.entity.UserInfo;
-import com.example.Hamkkenali2Server.service.TranslateService;
-import com.example.Hamkkenali2Server.service.UserInfoService;
+import com.example.Hamkkenali2Server.conversationalChatbot.dto.ChatCompletionDto;
+import com.example.Hamkkenali2Server.conversationalChatbot.service.ChatGPTService;
+import com.example.Hamkkenali2Server.conversationalChatbot.dto.ChatRequestMsgDto;
+import com.example.Hamkkenali2Server.conversationalChatbot.dto.TranslateRequestDTO;
+import com.example.Hamkkenali2Server.user.entity.UserInfo;
+import com.example.Hamkkenali2Server.conversationalChatbot.service.TranslateService;
+import com.example.Hamkkenali2Server.user.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +31,7 @@ public class TranslateController {
     private UserInfoService userInfoService;
 
     @PostMapping
-    public String translateAndSendToGPT(@RequestBody TranslateRequest request) {
+    public String translateAndSendToGPT(@RequestBody TranslateRequestDTO request) {
 
         saveInputToDatabase(request.getUserName(), request.getText());
 

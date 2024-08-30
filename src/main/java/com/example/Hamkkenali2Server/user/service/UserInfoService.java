@@ -1,7 +1,7 @@
-package com.example.Hamkkenali2Server.service;
+package com.example.Hamkkenali2Server.user.service;
 
-import com.example.Hamkkenali2Server.entity.UserInfo;
-import com.example.Hamkkenali2Server.entity.UserInfoRepository;
+import com.example.Hamkkenali2Server.user.entity.UserInfo;
+import com.example.Hamkkenali2Server.user.repository.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

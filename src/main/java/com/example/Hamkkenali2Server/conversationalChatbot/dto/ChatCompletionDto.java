@@ -1,4 +1,4 @@
-package com.example.Hamkkenali2Server.ChatGPT;
+package com.example.Hamkkenali2Server.conversationalChatbot.dto;
 
 import lombok.*;
 

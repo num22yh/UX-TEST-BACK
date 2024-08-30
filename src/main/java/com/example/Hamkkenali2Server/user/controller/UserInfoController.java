@@ -1,8 +1,8 @@
-package com.example.Hamkkenali2Server.controller;
+package com.example.Hamkkenali2Server.user.controller;
 
-import com.example.Hamkkenali2Server.Exception.DuplicateUsernameException;
-import com.example.Hamkkenali2Server.entity.UserInfo;
-import com.example.Hamkkenali2Server.service.UserInfoService;
+import com.example.Hamkkenali2Server.user.exeption.DuplicateUsernameException;
+import com.example.Hamkkenali2Server.user.entity.UserInfo;
+import com.example.Hamkkenali2Server.user.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

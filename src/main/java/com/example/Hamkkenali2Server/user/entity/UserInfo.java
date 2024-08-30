@@ -1,4 +1,4 @@
-package com.example.Hamkkenali2Server.entity;
+package com.example.Hamkkenali2Server.user.entity;
 // UserInfo.java
 
 import jakarta.persistence.*;
@@ -12,7 +12,7 @@ import jakarta.persistence.Entity;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "userINFO")
+@Table(name = "userinfo")
 public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

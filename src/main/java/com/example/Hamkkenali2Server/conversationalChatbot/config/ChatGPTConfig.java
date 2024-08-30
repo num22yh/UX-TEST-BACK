@@ -1,4 +1,4 @@
-package com.example.Hamkkenali2Server.ChatGPT;
+package com.example.Hamkkenali2Server.conversationalChatbot.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

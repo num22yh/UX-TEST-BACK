@@ -1,19 +1,16 @@
-package com.example.Hamkkenali2Server.ChatGPT;
+package com.example.Hamkkenali2Server.conversationalChatbot.service;
 
+import com.example.Hamkkenali2Server.conversationalChatbot.config.ChatGPTConfig;
+import com.example.Hamkkenali2Server.conversationalChatbot.dto.ChatCompletionDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 @Slf4j
 @Service
