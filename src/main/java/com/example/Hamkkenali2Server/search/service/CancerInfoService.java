@@ -9,13 +9,18 @@ import org.apache.lucene.analysis.ko.POS;
 import org.apache.lucene.analysis.ko.dict.UserDictionary;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
-
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 
 @Service
 public class CancerInfoService {
@@ -29,58 +34,52 @@ public class CancerInfoService {
         return cancerInfoRepository.findByContentId(contentId);
     }
 
-    public List<CancerInfo> searchData(String searchTerm) {
-        List<String> tokens;
+    public Page<CancerInfo> searchData(String searchTerm, int page, int size) {
         try {
+            // 토큰화
+            List<String> tokens = tokenize(searchTerm, initializeAnalyzer());
 
-            String dictPath = "src/main/resources/custom_dictionary.txt";
-            UserDictionary userDictionary;
-            try (Reader reader = new BufferedReader(new FileReader(dictPath))) {
-                userDictionary = UserDictionary.open(reader);
-            }
-
-            Set<POS.Tag> stopTags = EnumSet.of(
-                    POS.Tag.J,     // 조사
-                    POS.Tag.MAG,   // 일반 부사
-                    POS.Tag.MAJ,   // 접속 부사
-                    POS.Tag.E,     // 어미
-                    POS.Tag.IC,    // 감탄사
-                    POS.Tag.SF,    // 마침표, 물음표 등
-                    POS.Tag.SP,    // 공백
-                    POS.Tag.SC     // 구분자
-            );
-
-            KoreanAnalyzer analyzer = new KoreanAnalyzer(
-                    userDictionary,
-                    KoreanTokenizer.DecompoundMode.NONE,
-                    stopTags,
-                    false
-            );
-
-            tokens = tokenize(searchTerm, analyzer);
-
-            Set<CancerInfo> results = new HashSet<>();
+            // 모든 검색 결과를 병합
+            Set<CancerInfo> resultSet = new HashSet<>();
             for (String token : tokens) {
-                List<CancerInfo> matchingDocs = cancerInfoRepository.searchByKeyword(token);
-                results.addAll(matchingDocs);
+                Page<CancerInfo> pageResults = cancerInfoRepository.searchByKeyword(token, PageRequest.of(0, Integer.MAX_VALUE));
+                resultSet.addAll(pageResults.getContent());
             }
 
-            List<CancerInfo> finalResultList = new ArrayList<>(results);
+            List<CancerInfo> results = new ArrayList<>(resultSet);
 
-            finalResultList.sort((c1, c2) -> {
+            results.sort((c1, c2) -> {
                 int score1 = calculateRelevanceScore(c1, tokens);
                 int score2 = calculateRelevanceScore(c2, tokens);
                 return Integer.compare(score2, score1);
             });
 
-            return finalResultList;
+            // 페이징 처리
+            int start = Math.min(page * size, results.size());
+            int end = Math.min(start + size, results.size());
+            if (start >= results.size()) {
+                return Page.empty(PageRequest.of(page, size));
+            }
+            return new PageImpl<>(results.subList(start, end), PageRequest.of(page, size), results.size());
 
         } catch (IOException e) {
             logger.error("Failed to load custom dictionary or tokenize search term", e);
-            return new ArrayList<>();
+            return Page.empty();
         } catch (Exception e) {
             logger.error("Error during search", e);
-            return new ArrayList<>();
+            return Page.empty();
+        }
+    }
+
+    private KoreanAnalyzer initializeAnalyzer() throws IOException {
+        String dictPath = "src/main/resources/custom_dictionary.txt";
+        try (Reader reader = new BufferedReader(new FileReader(dictPath))) {
+            UserDictionary userDictionary = UserDictionary.open(reader);
+            Set<POS.Tag> stopTags = EnumSet.of(
+                    POS.Tag.J, POS.Tag.MAG, POS.Tag.MAJ, POS.Tag.E,
+                    POS.Tag.IC, POS.Tag.SF, POS.Tag.SP, POS.Tag.SC
+            );
+            return new KoreanAnalyzer(userDictionary, KoreanTokenizer.DecompoundMode.NONE, stopTags, false);
         }
     }
 
