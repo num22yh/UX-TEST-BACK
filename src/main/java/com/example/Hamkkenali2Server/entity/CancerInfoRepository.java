@@ -14,7 +14,7 @@ public interface CancerInfoRepository extends JpaRepository<CancerInfo, Integer>
     List<CancerInfo> findByCategory(String token);
     List<CancerInfo> findByContentContains(String token);
 
-    // 수정된 쿼리 메서드
+    
     List<CancerInfo> findByCancerNameOrCategoryOrContentContains(String cancerName, String category, String content);
 
 
