@@ -1,5 +1,6 @@
 UX 테스트용 앱의 백엔드 레포지토리 입니다.
-
+* 프론트엔드 레포지토리 : https://github.com/num22yh/UX-TEST-FRONT-APP
+  
 # 개요
 - 이 앱은 사용자에게 효과적으로 정보를 전달하는 방식을 탐색하는 연구의 일환으로 개발되었습니다.  
 - 검색, 규칙 기반 챗봇, 대화형 챗봇에서의 사용자 경험 차이를 비교하는 것을 목표로 합니다.
@@ -22,7 +23,7 @@ UX 테스트용 앱의 백엔드 레포지토리 입니다.
 ## 💻 기술 스택
 
 ### 시스템 아키텍처
-(이미지 삽입 예정)
+<img src="https://github.com/user-attachments/assets/4ef355ed-4dce-4fe5-8702-53872c181834"/>
 
 ### Frontend
 - **Language**: JavaScript (Node.js v20.10.0, npm 10.2.3)
